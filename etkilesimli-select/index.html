@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>test</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+</head>
+<body>
+    <div id="app">
+    <select name="" id="" v-model="secilenil" v-on:change="test()">
+    <option v-for="(iller, index) in sehirler"  v-bind:value="index">{{iller.adi}}</option>
+    </select>
+    
+    <select v-if="ilceler" name="" id="">
+    <option value="">Seçiniz</option>
+    <option v-for="(ilceler, index) in ilceler"  v-bind:value="index">{{ilceler}}</option>
+    </select>
+
+    </div>
+
+<script>
+Vue.config.devtools = true
+
+    
+
+    var app = new Vue({
+    el: '#app',
+    data: {
+       sehirler:[]
+       ,ilceler:null
+       ,secilenil:0
+       
+       
+     }
+     ,created(){
+      
+      this.datacek()
+    }
+    ,methods: {
+        datacek: function(){
+            fetch('./data/tr-il-ilce.json')
+         .then((res) =>{return res.json() })
+         .then((res) =>{
+             this.sehirler = res.sehirler;
+             
+           })
+        }
+        ,test:function(){
+            var hoopi = this.secilenil;
+            this.ilceler = this.sehirler[hoopi].ilceleri;
+        }
+    }
+})
+    </script>
+</body>
+</html>
