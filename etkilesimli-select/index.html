@@ -8,7 +8,7 @@
 </head>
 <body>
     <div id="app">
-    <select name="" id="" v-model="secilenil" v-on:change="test()">
+    <select name="" id="" v-model="secilenil" v-on:change="ilcegetir()">
     <option v-for="(iller, index) in sehirler"  v-bind:value="index">{{iller.adi}}</option>
     </select>
     
@@ -34,7 +34,7 @@ Vue.config.devtools = true
        
      }
      ,created(){
-      
+
       this.datacek()
     }
     ,methods: {
@@ -43,10 +43,9 @@ Vue.config.devtools = true
          .then((res) =>{return res.json() })
          .then((res) =>{
              this.sehirler = res.sehirler;
-             
            })
         }
-        ,test:function(){
+        ,ilcegetir:function(){
             var hoopi = this.secilenil;
             this.ilceler = this.sehirler[hoopi].ilceleri;
         }
